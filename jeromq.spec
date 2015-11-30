@@ -1,6 +1,6 @@
 Name:           jeromq
 Version:        0.3.5
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Pure Java implementation of libzmq
 # License headers in source files seem to indicate LGPLv3+, but pom.xml as well
 # as upstream licensing page (http://zeromq.org/area:licensing) specify license
@@ -24,6 +24,7 @@ This package contains the API documentation for %{name}.
 
 %prep
 %setup -q
+%pom_remove_plugin :maven-checkstyle-plugin
 
 %build
 # Tests require network access and fail on Koji.
@@ -40,6 +41,9 @@ This package contains the API documentation for %{name}.
 %license COPYING.LESSER
 
 %changelog
+* Mon Nov 30 2015 Mikolaj Izdebski <mizdebsk@redhat.com> - 0.3.5-3
+- Skip running checkstyle during build
+
 * Mon Oct  5 2015 Mikolaj Izdebski <mizdebsk@redhat.com> - 0.3.5-2
 - Skip running tests
 - Add comment clarify licensing
