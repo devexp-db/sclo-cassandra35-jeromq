@@ -1,6 +1,6 @@
 Name:           jeromq
 Version:        0.3.5
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Pure Java implementation of libzmq
 # License headers in source files seem to indicate LGPLv3+, but pom.xml as well
 # as upstream licensing page (http://zeromq.org/area:licensing) specify license
@@ -41,6 +41,9 @@ This package contains the API documentation for %{name}.
 %license COPYING.LESSER
 
 %changelog
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.3.5-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Mon Nov 30 2015 Mikolaj Izdebski <mizdebsk@redhat.com> - 0.3.5-3
 - Skip running checkstyle during build
 
