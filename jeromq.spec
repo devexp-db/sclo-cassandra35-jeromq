@@ -1,6 +1,6 @@
 Name:           jeromq
 Version:        0.3.5
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Pure Java implementation of libzmq
 # License headers in source files seem to indicate LGPLv3+, but pom.xml as well
 # as upstream licensing page (http://zeromq.org/area:licensing) specify license
@@ -12,6 +12,9 @@ BuildArch:      noarch
 Source0:        https://github.com/zeromq/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires:  maven-local
+BuildRequires:  mvn(org.apache.felix:maven-bundle-plugin)
+BuildRequires:  mvn(org.apache.maven.plugins:maven-source-plugin)
+BuildRequires:  mvn(org.sonatype.oss:oss-parent:pom:)
 
 %description
 Pure Java implementation of libzmq.
@@ -41,6 +44,9 @@ This package contains the API documentation for %{name}.
 %license COPYING.LESSER
 
 %changelog
+* Wed Jun 15 2016 Mikolaj Izdebski <mizdebsk@redhat.com> - 0.3.5-5
+- Add missing build-requires
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.3.5-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
