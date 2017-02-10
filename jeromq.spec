@@ -1,6 +1,6 @@
 Name:           jeromq
 Version:        0.3.6
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Pure Java implementation of libzmq
 License:        MPLv2.0
 URL:            https://github.com/zeromq/jeromq
@@ -41,6 +41,9 @@ This package contains the API documentation for %{name}.
 %license LICENSE
 
 %changelog
+* Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.3.6-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Thu Sep 29 2016 Mikolaj Izdebski <mizdebsk@redhat.com> - 0.3.6-1
 - Update to upstream version 0.3.6
 
