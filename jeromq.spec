@@ -1,37 +1,47 @@
-Name:           jeromq
-Version:        0.3.6
-Release:        2%{?dist}
-Summary:        Pure Java implementation of libzmq
-License:        MPLv2.0
-URL:            https://github.com/zeromq/jeromq
-BuildArch:      noarch
+%{?scl:%scl_package jeromq}
+%{!?scl:%global pkg_name %{name}}
 
-Source0:        https://github.com/zeromq/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Name:		%{?scl_prefix}jeromq
+Version:	0.3.6
+Release:	3%{?dist}
+Summary:	Pure Java implementation of libzmq
+License:	MPLv2.0
+URL:		https://github.com/zeromq/jeromq
+BuildArch:	noarch
 
-BuildRequires:  maven-local
-BuildRequires:  mvn(org.apache.felix:maven-bundle-plugin)
-BuildRequires:  mvn(org.apache.maven.plugins:maven-source-plugin)
-BuildRequires:  mvn(org.sonatype.oss:oss-parent:pom:)
+Source0:	https://github.com/zeromq/%{pkg_name}/archive/v%{version}.tar.gz#/%{pkg_name}-%{version}.tar.gz
+
+BuildRequires:	%{?scl_prefix_maven}maven-local
+BuildRequires:	%{?scl_prefix_maven}maven-plugin-bundle
+BuildRequires:	%{?scl_prefix_maven}sonatype-oss-parent
+%{?scl:Requires: %scl_runtime}
 
 %description
 Pure Java implementation of libzmq.
 
-%package        javadoc
-Summary:        Javadoc for %{name}
+%package javadoc
+Summary:	Javadoc for %{name}
 
 %description javadoc
 This package contains the API documentation for %{name}.
 
 %prep
-%setup -q
+%setup -q -n %{pkg_name}-%{version}
+%{?scl:scl enable %{scl_maven} %{scl} - << "EOF"}
 %pom_remove_plugin :maven-checkstyle-plugin
+%pom_remove_plugin :maven-source-plugin
+%{?scl:EOF}
 
 %build
+%{?scl:scl enable %{scl_maven} %{scl} - << "EOF"}
 # Tests require network access and fail on Koji.
 %mvn_build -f
+%{?scl:EOF}
 
 %install
+%{?scl:scl enable %{scl_maven} %{scl} - << "EOF"}
 %mvn_install
+%{?scl:EOF}
 
 %files -f .mfiles
 %doc README.md CHANGELOG.md AUTHORS
@@ -41,6 +51,9 @@ This package contains the API documentation for %{name}.
 %license LICENSE
 
 %changelog
+* Wed Mar 01 2017 Tomas Repik <trepik@redhat.com> - 0.3.6-3
+- scl conversion
+
 * Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.3.6-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
